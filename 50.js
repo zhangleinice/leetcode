@@ -18,16 +18,29 @@ function pow(x, n) {
   return n >= 0 ? cal(x, n) : 1 / cal(x, -n);
 }
 
-// 改写成循环
-function pow2(x, n) {
+/**
+ * 快速幂
+ * x^n = (x^2)^n/2 = (x^4)^(n/4)
+ * @param {*} x
+ * @param {*} n
+ * @returns
+ */
+function pow3(x, n) {
+  return n > 0 ? quickMi(x, n) : 1 / quickMi(x, -n);
+}
+function quickMi(x, n) {
+  if (n === 0) return 1;
   let res = 1;
-  for (let i = n; i !== 0; i = Math.floor(i / 2)) {
-    if (n % 2) {
+  while (n > 0) {
+    if (n & 1) {
+      res *= x;
     }
-    res = res * x;
+    x *= x;
+    // n >>= 1;  有点bug
+    n /= 2;
   }
-  return n > 0 ? res : 1 / res;
+  return res;
 }
 
-let x = pow(2, 3);
+let x = pow3(2.0, -3);
 console.log("x", x);
