@@ -5,8 +5,7 @@
  * @returns
  * 1.暴力求解 O(n)
  * 2.递归分治 O(logN)
- * 3.迭代
- * 4.位运算
+ * 3.快速幂
  */
 
 function cal(x, n) {
@@ -19,7 +18,7 @@ function pow(x, n) {
 }
 
 /**
- * 快速幂
+ * 快速幂 (O(logn))
  * x^n = (x^2)^n/2 = (x^4)^(n/4)
  * @param {*} x
  * @param {*} n
