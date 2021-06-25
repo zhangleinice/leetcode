@@ -8,11 +8,18 @@
  * 3.快速幂
  */
 
+// 1.递归暴力求解, O(n),可能会栈溢出
+function pow1(x, n) {
+  if (n === 0) return 1;
+  return n > 0 ? pow1(x, n - 1) * x : (1 / x) * pow1(x, n + 1);
+}
+
 function cal(x, n) {
   if (n === 0) return 1;
   let y = cal(x, Math.floor(n / 2));
   return n % 2 ? y * y * x : y * y;
 }
+// 2.递归分治 O(logN)
 function pow(x, n) {
   return n >= 0 ? cal(x, n) : 1 / cal(x, -n);
 }
