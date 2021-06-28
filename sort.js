@@ -22,8 +22,27 @@ function bubbleSort(arr) {
   return arr;
 }
 
-let nums = bubbleSort([3, 4, 1, 2]);
-console.log("nums", nums);
+/**
+ * 插入排序
+ * @param {*} arr
+ */
+function insertSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let preIndex = i - 1;
+    current = arr[i];
+    while (arr[preIndex] > current && preIndex >= 0) {
+      arr[preIndex + 1] = arr[preIndex];
+      console.log("arr", arr);
+      preIndex--;
+    }
+    arr[preIndex + 1] = current;
+    console.log("arr1", arr);
+  }
+  return arr;
+}
+
+let nums = insertSort([3, 4, 1, 2]);
+// console.log("nums", nums);
 
 function getMax(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -34,4 +53,23 @@ function getMax(arr) {
     }
   }
   return arr;
+}
+
+// 插入排序，a表示数组，n表示数组大小
+function insertionSort(arr) {
+  if (arr.length <= 1) return;
+
+  for (let i = 1; i < arr.length; ++i) {
+    let value = a[i];
+    let j = i - 1;
+    // 查找插入的位置
+    for (; j >= 0; --j) {
+      if (a[j] > value) {
+        a[j + 1] = a[j]; // 数据移动
+      } else {
+        break;
+      }
+    }
+    a[j + 1] = value; // 插入数据
+  }
 }
