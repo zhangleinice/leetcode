@@ -45,5 +45,38 @@ function insertSort(arr) {
   return arr;
 }
 
-let nums = insertSort([3, 4, 1, 2]);
+/**
+ * 归并排序 nlogN
+ * @param {*} arr
+ * @returns
+ */
+
+// 1. 递归拆分成单个值的数组 logN
+function mergeSort(arr) {
+  if (arr.length < 2) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = arr.slice(0, mid);
+  const right = arr.slice(mid);
+  console.log("leftArr", left);
+  console.log("rightArr", right);
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  let result = [];
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] > right[0]) {
+      result.push(right.shift());
+    } else {
+      result.push(left.shift());
+    }
+  }
+  console.log("result111", result);
+  while (left.length > 0) result.push(left.shift());
+  while (right.length > 0) result.push(right.shift());
+  console.log("result222", result);
+  return result;
+}
+
+let nums = mergeSort([3, 4, 1, 2]);
 console.log("nums", nums);
