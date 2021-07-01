@@ -1,5 +1,6 @@
 /**
  * 冒泡排序
+ * 原理：相邻元素交换位置，找到最大(小)放到最后
  * 优化：当已经排好序之后，则不再需要再交换，break
  * @param {*} arr
  */
@@ -24,52 +25,25 @@ function bubbleSort(arr) {
 
 /**
  * 插入排序
+ * 原理： 无序区间像有序区间插入，插入时挨个比较，只移动不用挨个交换
  * @param {*} arr
  */
 function insertSort(arr) {
   for (let i = 1; i < arr.length; i++) {
-    let preIndex = i - 1;
-    current = arr[i];
-    while (arr[preIndex] > current && preIndex >= 0) {
-      arr[preIndex + 1] = arr[preIndex];
-      console.log("arr", arr);
-      preIndex--;
+    let value = arr[i];
+    let j = i - 1;
+    for (; j >= 0; j--) {
+      if (arr[j] > value) {
+        // 注意只是移动，没有交换
+        arr[j + 1] = arr[j];
+      } else {
+        break;
+      }
     }
-    arr[preIndex + 1] = current;
-    console.log("arr1", arr);
+    arr[j + 1] = value;
   }
   return arr;
 }
 
 let nums = insertSort([3, 4, 1, 2]);
-// console.log("nums", nums);
-
-function getMax(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      let t = arr[i];
-      arr[i] = arr[i + 1];
-      arr[i + 1] = t;
-    }
-  }
-  return arr;
-}
-
-// 插入排序，a表示数组，n表示数组大小
-function insertionSort(arr) {
-  if (arr.length <= 1) return;
-
-  for (let i = 1; i < arr.length; ++i) {
-    let value = a[i];
-    let j = i - 1;
-    // 查找插入的位置
-    for (; j >= 0; --j) {
-      if (a[j] > value) {
-        a[j + 1] = a[j]; // 数据移动
-      } else {
-        break;
-      }
-    }
-    a[j + 1] = value; // 插入数据
-  }
-}
+console.log("nums", nums);
