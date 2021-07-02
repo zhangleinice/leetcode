@@ -46,35 +46,36 @@ function insertSort(arr) {
 }
 
 /**
- * 归并排序 nlogN
+ * 归并排序 nlogN，空间复杂度 O(n)
+ * 原理：递归分治成单个数的数组，再进行两个有序数组的合并
  * @param {*} arr
  * @returns
  */
 
 // 1. 递归拆分成单个值的数组 logN
 function mergeSort(arr) {
+  // 直到分割成单个值的数组，终止
   if (arr.length < 2) return arr;
   const mid = Math.floor(arr.length / 2);
   const left = arr.slice(0, mid);
   const right = arr.slice(mid);
-  console.log("leftArr", left);
-  console.log("rightArr", right);
   return merge(mergeSort(left), mergeSort(right));
 }
 
+// 合并两个有序数组
 function merge(left, right) {
   let result = [];
-  while (left.length > 0 && right.length > 0) {
+  // left 和 right 都不为空时
+  while (left.length && right.length) {
     if (left[0] > right[0]) {
       result.push(right.shift());
     } else {
       result.push(left.shift());
     }
   }
-  console.log("result111", result);
+  // left 和 right 有一个为空时
   while (left.length > 0) result.push(left.shift());
   while (right.length > 0) result.push(right.shift());
-  console.log("result222", result);
   return result;
 }
 
