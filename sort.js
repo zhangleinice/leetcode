@@ -61,12 +61,12 @@ function mergeSort(arr) {
   const right = arr.slice(mid);
   return merge(mergeSort(left), mergeSort(right));
 }
-
-// 合并两个有序数组
+// 2. 合并两个有序数组
 function merge(left, right) {
   let result = [];
   // left 和 right 都不为空时
   while (left.length && right.length) {
+    // 保证稳定排序
     if (left[0] > right[0]) {
       result.push(right.shift());
     } else {
@@ -79,5 +79,25 @@ function merge(left, right) {
   return result;
 }
 
-let nums = mergeSort([3, 4, 1, 2]);
+/**
+ * 快排  nlogN,
+ * @param {*} arr
+ */
+function quickSort(arr) {
+  if (arr.length < 2) return arr;
+  const pivot = arr.shift();
+  const left = [];
+  const right = [];
+  let i = 0;
+  for (; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}
+
+let nums = quickSort([3, 4, 1, 2]);
 console.log("nums", nums);
