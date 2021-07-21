@@ -24,7 +24,19 @@ var mySqrt = function (x) {
 };
 
 // 保留6位小数
-var mySqrt2 = function (x) {};
+var mySqrt2 = function (x) {
+  let [left, right] = [0, x];
+  let mid = x / 2;
+  while (Math.abs(mid * mid - x) > 0.000001) {
+    if (mid * mid > x) {
+      right = mid;
+    } else {
+      left = mid;
+    }
+    mid = left + (right - left) / 2;
+  }
+  return mid;
+};
 
 // 牛顿迭代法
 // Xn+1 = Xn - f(Xn)/f'(Xn) = Xn - (Xn^2 - y)/2Xn = (Xn + y/Xn)/2
