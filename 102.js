@@ -1,6 +1,6 @@
 /**
  * 二叉树按层序遍历
- * 1. BFS
+ * 1. BFS,借助一个queue
  * 2. DFS
  */
 /**
@@ -15,24 +15,21 @@
  */
 // bfs
 var levelOrder = function (root) {
-  const ret = [];
-  if (!root) return ret;
-  const q = [];
-  q.push(root);
+  const res = [];
+  if (!root) return res;
+  const q = [root];
   while (q.length) {
-    ret.push([]);
-    // q.length必须提取出来
-    const currentLevelSize = q.length;
-    for (let i = 0; i < currentLevelSize; i++) {
-      //   console.log("currentLevelSize", currentLevelSize);
-      //   console.log("len", q.length);
+    const curr_level = [];
+    const len = q.length;
+    for (let i = 0; i < len; i++) {
       const node = q.shift();
-      ret[ret.length - 1].push(node.val);
+      curr_level.push(node.val);
       if (node.left) q.push(node.left);
       if (node.right) q.push(node.right);
     }
+    res.push(curr_level);
   }
-  return ret;
+  return res;
 };
 
 const tree = {
