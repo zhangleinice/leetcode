@@ -1,5 +1,6 @@
 /**
  * 二叉树的最小深度
+ * 注意是根节点到最近叶子节点的最短路径上的节点数量
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
