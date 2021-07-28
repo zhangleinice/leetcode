@@ -35,3 +35,10 @@
 # 二叉树
   - 前序，中序，后序遍历
   - 102.按层序遍历(bfs, dfs)
+  - 104.二叉树的最大深度(bfs,dfs)
+  - 二叉搜索树的查找，插入，删除
+
+
+# BFS(Breadth Frist Search)
+
+# DFS(Depth First Search)
