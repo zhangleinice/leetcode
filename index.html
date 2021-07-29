@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="header">
+            <div class="logo"></div>
+        </section>
+        <section class="main">
+            <div class="sidebar">
+                <ul class="menu">
+                    <li class='li'>
+                        <a href="" id='demo'>li1-a</a>
+                    </li>
+                    <li class='li'>
+                        <a href="">li2</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="copyright"></div>
+        </section>
+    </div>
+</body>
+</html>
+
+<script>
+    // bfs
+    function getElementById(wrapper, id) {
+        if(!wrapper) return null
+        let queue = [warpper];
+        while (queue.length) {
+            const len = queue.length;
+            for (let i = 0; i < len; i++) {
+                const node = queue.shift();
+                if (node.id === id) {
+                    return node;
+                }
+                queue = queue.concat([...node.children])
+            }
+        }
+    }
+    // dfs
+    // forEach,map不能终止
+    function getElementByIdDFS(warpper, id){
+        if(!warpper) return null
+        if(warpper.id === id) return warpper;
+        const childs = [...warpper.children]
+        for(let child of childs){
+            const node = getElementByIdDFS(child, id)
+            if(node){
+                return node
+            }
+        }
+    }
+    const warpper = document.querySelector('.wrapper')
+    const dom = getElementByIdDFS(warpper, 'demo')
+    console.log('dom',dom);
+</script>
