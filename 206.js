@@ -19,7 +19,9 @@ const reverseList = function (head) {
     // curr.next = prev;
     // prev = curr;
     // curr = next;
+
     // 同时赋值，指针不会丢失
+    // [a, b] = [b, a] 能交换成功，不需要中间变量
     [curr.next, prev, curr] = [prev, curr, curr.next];
   }
   return prev;
