@@ -16,7 +16,9 @@ const reverseList = function (head) {
   while (curr) {
     // 注意存储下一个指针，防止next丢失
     // const next = curr.next;
+    // 反转
     // curr.next = prev;
+    // 后移一位
     // prev = curr;
     // curr = next;
 
