@@ -29,4 +29,17 @@ var climbStairs2 = function (n) {
   return dp[n];
 };
 
-console.log(climbStairs2(3));
+// 动态数组，优化空间复杂度
+var climbStairs3 = function (n) {
+  let p = 0,
+    q = 0,
+    r = 1;
+  for (let i = 0; i < n; i++) {
+    p = q;
+    q = r;
+    r = p + q;
+  }
+  return r;
+};
+
+console.log(climbStairs3(3));
