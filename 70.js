@@ -8,13 +8,10 @@
 // 递推公式 f(n) = f(n - 1) + f(n - 2)
 
 // 递归 + 记忆
-const memory = [];
-var climbStairs = function (n) {
+var climbStairs = function (n, memory = [0, 1]) {
   if (n <= 2) return n;
-  memory[0] = 0;
-  memory[1] = 1;
   if (memory[n]) return memory[n];
-  memory[n] = climbStairs(n - 1) + climbStairs(n - 2);
+  memory[n] = climbStairs(n - 1, memory) + climbStairs(n - 2, memory);
   return memory[n];
 };
 
@@ -42,4 +39,14 @@ var climbStairs3 = function (n) {
   return r;
 };
 
-console.log(climbStairs3(3));
+// 优化
+var climbStairs4 = function (n) {
+  let p = 1,
+    q = 1;
+  for (let i = 1; i < n; i++) {
+    [p, q] = [q, p + q];
+  }
+  return q;
+};
+
+console.log(climbStairs4(3));
