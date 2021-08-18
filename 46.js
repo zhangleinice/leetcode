@@ -3,6 +3,8 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+
+// 注意 循环里dfs 调用dfs，函数调用栈里面会有多个dfs，执行完最上面一个会接着执行下面的dfs
 var permute = function (nums) {
   let res = [];
   let set = new Set();
@@ -13,13 +15,35 @@ var permute = function (nums) {
       return;
     }
     for (let val of nums) {
+      // 剪枝
       if (set.has(val)) continue;
       set.add(val);
       dfs();
-      // 回溯
+      // 回溯,delete上一层的dfs，紧接着执行下一层的dfs，注意上层的for循环执行第几个数
       set.delete(val);
     }
   }
+  dfs();
+  return res;
+};
+
+var permute2 = function (nums) {
+  let res = [];
+  let subs = [];
+  function dfs() {
+    if (subs.length === nums.length) {
+      res.push([...subs]);
+      return;
+    }
+    for (let num of nums) {
+      // 剪枝
+      if (subs.includes(num)) continue;
+      subs.push(num);
+      dfs(subs);
+      subs.pop();
+    }
+  }
+
   dfs();
   return res;
 };
