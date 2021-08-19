@@ -1,5 +1,6 @@
 /**
  * 全排列
+ * 抽象成一棵树，dfs + 回溯（有序）
  * @param {number[]} nums
  * @return {number[][]}
  */
