@@ -58,12 +58,12 @@ var compareVersion2 = function (version1, version2) {
     }
     p1 = end1 + 1;
   }
-  while (p1 < version1.length) {
+  while (p2 < version2.length) {
     const end2 = getChunkIndex(version2, p2);
     const next2 = +version2.slice(p2, end2);
     if (0 > next2) {
       return 1;
-    } else if (next2 < 0) {
+    } else if (next2 > 0) {
       return -1;
     }
     p2 = end2 + 1;
