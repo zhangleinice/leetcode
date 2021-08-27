@@ -5,7 +5,7 @@
  * @return {number}
  */
 
-// 注意考虑周全，细节；没啥难度
+// 空间复杂度 O(N + M),使用了两个数组存储两个字符串
 var compareVersion = function (version1, version2) {
   const v1 = version1.split(".");
   const v2 = version2.split(".");
@@ -24,10 +24,57 @@ var compareVersion = function (version1, version2) {
   return 0;
 };
 
+// 双指针降低时间，空间复杂度
+var compareVersion2 = function (version1, version2) {
+  let p1 = 0,
+    p2 = 0;
+  function getChunkIndex(str, index) {
+    while (str[index] !== "." && index < str.length) {
+      index++;
+    }
+    return index;
+  }
+  while (p1 < version1.length && p2 < version2.length) {
+    const end1 = getChunkIndex(version1, p1);
+    const end2 = getChunkIndex(version2, p2);
+    const next1 = +version1.slice(p1, end1);
+    const next2 = +version2.slice(p2, end2);
+    if (next1 > next2) {
+      return 1;
+    } else if (next1 < next2) {
+      return -1;
+    }
+    p1 = end1 + 1;
+    p2 = end2 + 1;
+  }
+  // version1字符更长时
+  while (p1 < version1.length) {
+    const end1 = getChunkIndex(version1, p1);
+    const next1 = +version1.slice(p1, end1);
+    if (next1 > 0) {
+      return 1;
+    } else if (next1 < 0) {
+      return -1;
+    }
+    p1 = end1 + 1;
+  }
+  while (p1 < version1.length) {
+    const end2 = getChunkIndex(version2, p2);
+    const next2 = +version2.slice(p2, end2);
+    if (0 > next2) {
+      return 1;
+    } else if (next2 < 0) {
+      return -1;
+    }
+    p2 = end2 + 1;
+  }
+  return 0;
+};
+
 const version1 = "1.0.1",
   version2 = "1";
 
-console.log(compareVersion(version1, version2));
+console.log(compareVersion2(version1, version2));
 
 // 输入：version1 = "1.01", version2 = "1.001"
 // 输出：0
