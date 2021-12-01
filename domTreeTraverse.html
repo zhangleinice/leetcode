@@ -42,7 +42,8 @@
                 if (node.id === id) {
                     return node;
                 }
-                queue = queue.concat([...node.children])
+                // queue = queue.concat([...node.children])
+                if(node.children) queue.push(...node.children)
             }
         }
     }
@@ -60,6 +61,6 @@
         }
     }
     const warpper = document.querySelector('.wrapper')
-    const dom = getElementByIdDFS(warpper, 'demo')
+    const dom = getElementById(warpper, 'demo')
     console.log('dom',dom);
 </script>
