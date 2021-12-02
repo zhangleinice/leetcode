@@ -52,4 +52,4 @@ const tree = {
 };
 
 let x = levelOrder(tree);
-console.log("x", x);
+console.log("x", x); // [ [ 'A' ], [ 'B', 'C' ], [ 'D', 'E', 'F' ] ]
