@@ -1,3 +1,20 @@
+var binarySearch = function (nums, target) {
+  let start = 0;
+  let end = nums.length - 1;
+  while (start <= end) {
+    // 优化
+    let mid = start + ((end - start) >> 1);
+    if (nums[mid] > target) {
+      high = mid - 1;
+    } else if (nums[mid] < target) {
+      low = mid + 1;
+    } else {
+      return mid;
+    }
+  }
+  return -1;
+};
+
 /**
  * 二分查找变形问题
  * @param {*} nums
