@@ -4,6 +4,9 @@
  * @param {string} version2
  * @return {number}
  */
+//  输入：version1 = "1.01", version2 = "1.001"
+//  输出：0
+//  解释：忽略前导零，"01" 和 "001" 都表示相同的整数 "1"
 
 // 空间复杂度 O(N + M),使用了两个数组存储两个字符串
 var compareVersion = function (version1, version2) {
