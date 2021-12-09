@@ -44,6 +44,7 @@ function getElementById(wapper, id) {
       if (node.children) queue.push(...node.children);
     }
   }
+  return null;
 }
 
 function levelOrder(root) {
