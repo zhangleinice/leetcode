@@ -121,12 +121,9 @@ var merge = function (nums1, m, nums2, n) {
       nums1[x--] = nums1[p--];
     }
   }
-  // 当短数组移动完毕，剩下的长数组依次移动到
+  // 当nums1移动完毕，nums2依次放入nums1
   while (q >= 0) {
     nums1[x--] = nums2[q--];
-  }
-  while (p >= 0) {
-    nums1[x--] = nums1[p--];
   }
   return nums1;
 };
