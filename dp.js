@@ -16,7 +16,7 @@ var climbStairs = function (n) {
   return dp[n];
 };
 
-// 优化空间复杂度
+// 滚动数组思想,优化空间复杂度
 //  0, 0, 1  ==> 0,1,1  ==> 1,1,2
 var climbStairs2 = function (n) {
   let p = 0,
@@ -30,17 +30,43 @@ var climbStairs2 = function (n) {
   return r;
 };
 
-var climbStairs3 = function (n) {
-  let p = 1,
-    q = 1;
-  for (let i = 1; i < n; i++) {
-    // let t = p;
-    // p = q;
-    // q = t + q;
-    [p, q] = [q, p + q];
+let num = climbStairs2(3);
+console.log(num);
+
+/**
+ * 53.最大连续子序和
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+//  输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+//  输出：6
+//  解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+
+// 转移方程  f(i) = Math.max(f(i - 1) + f(i), f(i))
+
+// nums = [-2,1,-3,4,-1,2,1,-5,4]
+// max  = [-2,1,-2,4, 3,5,6, 1,5]
+var maxSubArray = function (nums) {
+  let sum = [];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    max = Math.max(max + nums[i], nums[i]);
+    sum.push(max);
   }
-  return q;
+  return Math.max(...sum);
 };
 
-let num = climbStairs3(3);
-console.log(num);
+// 优化空间复杂度
+var maxSubArray2 = function (nums) {
+  let pre = nums[0],
+    max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    pre = Math.max(pre + nums[i], nums[i]);
+    max = Math.max(pre, max);
+  }
+  return max;
+};
+
+const x = maxSubArray2([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+console.log(x);
