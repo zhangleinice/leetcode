@@ -30,6 +30,7 @@ var findKthLargest = function (nums, k) {
   return list[k - 1];
 };
 // 基于快速排序的选择方法
+// pivot的下标能确定，和第k大进行对比
 var findKthLargest2 = function (nums, k) {
   let left = [],
     right = [],
@@ -43,13 +44,18 @@ var findKthLargest2 = function (nums, k) {
   }
   pivotIdx = left.length;
   if (pivotIdx === k - 1) {
-    console.log("pivot", pivot);
     return pivot;
   } else if (pivotIdx > k - 1) {
-    findKthLargest2(left, k);
+    return findKthLargest2(left, k);
   } else {
-    findKthLargest2(right, k);
+    return findKthLargest2(right, k);
   }
 };
 
-console.log("x", findKthLargest2([3, 2, 1, 5, 6, 4], 2));
+let x = findKthLargest2([2, 1], 1);
+let y = findKthLargest2([3, 2, 3, 1, 2, 4, 5, 5, 6], 4);
+let z = findKthLargest2([3, 2, 1, 5, 6, 4], 2);
+
+console.log("x", x);
+console.log("y", y);
+console.log("z", z);
