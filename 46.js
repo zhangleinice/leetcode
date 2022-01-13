@@ -31,16 +31,20 @@ var permute = function (nums) {
 var permute2 = function (nums) {
   let res = [];
   let subs = [];
+  // 记录访问过得节点
+  let visited = new Array(nums.length).fill(false);
   function dfs() {
     if (subs.length === nums.length) {
       res.push([...subs]);
       return;
     }
-    for (let num of nums) {
+    for (let i = 0; i < nums.length; i++) {
       // 剪枝
-      if (subs.includes(num)) continue;
-      subs.push(num);
-      dfs(subs);
+      if (visited[i]) continue;
+      visited[i] = true;
+      subs.push(nums[i]);
+      dfs();
+      visited[i] = false;
       subs.pop();
     }
   }
@@ -49,7 +53,7 @@ var permute2 = function (nums) {
   return res;
 };
 
-const x = permute([1, 2, 3]);
+const x = permute2([1, 2, 3]);
 console.log("x", x);
 
 // 输入：nums = [1,2,3]

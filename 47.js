@@ -15,23 +15,27 @@
 var permuteUnique = function (nums) {
   const res = [];
   const arr = [];
-  const vis = new Array(nums.length).fill(false);
+  // 先排序
+  nums.sort((x, y) => x - y);
+  // 添加访问记录，类似图的遍历，避免重复
+  const visited = new Array(nums.length).fill(false);
   function dfs(idx) {
     if (idx === nums.length) {
       res.push(arr.slice());
       return;
     }
     for (let i = 0; i < nums.length; i++) {
-      if (vis[i] || (i > 0 && nums[i] === nums[i - 1] && !vis[i - 1])) continue;
+      // 访问过的跳过； 和前一个相等的跳过 && 前一个未访问的跳过
+      if (visited[i] || (nums[i] === nums[i - 1] && !visited[i - 1])) continue;
       arr.push(nums[i]);
-      vis[i] = true;
+      visited[i] = true;
       dfs(idx + 1);
-      vis[i] = false;
+      visited[i] = false;
       // 回溯
       arr.pop();
     }
   }
-  nums.sort((x, y) => x - y);
+
   dfs(0);
   return res;
 };
