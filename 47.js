@@ -12,6 +12,8 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+
+// 先排序，第一个值为重复的跳过
 var permuteUnique = function (nums) {
   const res = [];
   const arr = [];
@@ -36,6 +38,32 @@ var permuteUnique = function (nums) {
     }
   }
 
+  dfs(0);
+  return res;
+};
+
+// !这个方案是错的，还是得先排序
+// 不用排序，第一个值为重复的跳过
+var permuteUnique2 = function (nums) {
+  const res = [];
+  const arr = [];
+  const vis = new Array(nums.length).fill(false);
+  function dfs(idx) {
+    if (idx === nums.length) {
+      res.push(arr.slice());
+      return;
+    }
+    for (let i = 0; i < nums.length; i++) {
+      // 走过的跳过；第一个节点为重复的也直接跳过
+      if (vis[i] || (i > 0 && arr.slice().includes(nums[i]))) continue;
+      arr.push(nums[i]);
+      vis[i] = true;
+      dfs(idx + 1);
+      vis[i] = false;
+      // 回溯
+      arr.pop();
+    }
+  }
   dfs(0);
   return res;
 };
