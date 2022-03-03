@@ -5,9 +5,9 @@ var binarySearch = function (nums, target) {
     // 优化
     let mid = start + ((end - start) >> 1);
     if (nums[mid] > target) {
-      high = mid - 1;
+      start = mid - 1;
     } else if (nums[mid] < target) {
-      low = mid + 1;
+      end = mid + 1;
     } else {
       return mid;
     }
