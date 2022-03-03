@@ -41,7 +41,9 @@ var threeSum2 = function (nums) {
         l++;
       } else {
         res.push([nums[i], nums[l], nums[r]]);
-        // push之后需移动指针
+        while (l < r && nums[l] === nums[l + 1]) l++;
+        while (l < r && nums[r] === nums[r - 1]) r--;
+        // push之后需移动指针,防止死循环
         l++;
         r--;
       }
