@@ -1,12 +1,17 @@
 /**
  * 接雨水
- * 1. 常规思想
- * 2. 动态规划
- * 3. 双指针
- * 4. 单调栈
+ * 1. 常规思想 time O(N*N)  space O(N)
+ * 2. 动态规划 time O(N)  space O(N)
+ * 3. 双指针   time O(N)  space O(1)
+ * 4. 单调栈   time O(N)  space O(N)
+ *
+ * 思路：
+ * 1. 每个位置的雨水量 = 左右两边雨水量最小值 - 当前位置
+ * 2. 凹陷处才能接雨水，用单调递减栈，比栈顶大形成凹陷
  * @param {number[]} height
  * @return {number}
  */
+
 var trap = function (height) {
   let ans = 0;
   let len = height.length;
@@ -75,6 +80,27 @@ var trap2 = function (height) {
   return ans;
 };
 
+// 双指针降低空间复杂度
+var trap4 = function (height) {
+  let ans = 0;
+  let l = 0;
+  let r = height.length - 1;
+  let max_left = 0;
+  let max_right = 0;
+
+  while (l < r) {
+    max_left = Math.max(max_left, height[l]);
+    max_right = Math.max(max_right, height[r]);
+    if (max_left < max_right) {
+      ans += max_left - height[l++];
+    } else {
+      ans += max_right - height[r--];
+    }
+  }
+
+  return ans;
+};
+
 // 单调递减栈
 var trap3 = function (height) {
   let len = height.length;
@@ -104,4 +130,4 @@ var trap3 = function (height) {
 };
 
 const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
-console.log(trap3(height));
+console.log(trap4(height));
