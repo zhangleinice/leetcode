@@ -33,11 +33,28 @@
 
 <script>
     // bfs
+    function getElementById1(warpper, id){
+        if(!warpper) return null
+
+        let queue = [warpper]
+
+        while(queue.length){
+            const node = queue.shift()
+            if(node.id === id) return node;
+            if(node.children) {
+                queue.push(...node.children)
+            }
+        }
+        return null
+    }
+
+    // bfs
     function getElementById(wrapper, id) {
         if(!wrapper) return null
         let queue = [warpper];
         while (queue.length) {
             const len = queue.length;
+            // 不用记录当前层级完毕，其实不用再循环
             for (let i = 0; i < len; i++) {
                 const node = queue.shift();
                 if (node.id === id) {
@@ -62,6 +79,6 @@
         }
     }
     const warpper = document.querySelector('.wrapper')
-    const dom = getElementById(warpper, 'demo')
+    const dom = getElementById1(warpper, 'demo')
     console.log('dom',dom);
 </script>

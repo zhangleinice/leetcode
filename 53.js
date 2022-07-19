@@ -5,6 +5,15 @@
  * @return {number}
  */
 
+var maxSubArray3 = function (nums) {
+  const dp = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+  }
+
+  return Math.max(...dp);
+};
+
 // 状态转移方程  f(i) = Max( f(i-1) + nums[i], nums[i] )
 var maxSubArray2 = function (nums) {
   let subs = [],

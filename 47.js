@@ -21,24 +21,25 @@ var permuteUnique = function (nums) {
   nums.sort((x, y) => x - y);
   // 添加访问记录，类似图的遍历，避免重复
   const visited = new Array(nums.length).fill(false);
-  function dfs(idx) {
-    if (idx === nums.length) {
+  function dfs() {
+    if (arr.length === nums.length) {
       res.push(arr.slice());
       return;
     }
     for (let i = 0; i < nums.length; i++) {
       // 访问过的跳过； 和前一个相等的跳过 && 前一个未访问的跳过
-      if (visited[i] || (nums[i] === nums[i - 1] && !visited[i - 1])) continue;
+      if (visited[i] || (i > 0 && nums[i] === nums[i - 1] && !visited[i - 1]))
+        continue;
       arr.push(nums[i]);
       visited[i] = true;
-      dfs(idx + 1);
+      dfs();
       visited[i] = false;
       // 回溯
       arr.pop();
     }
   }
 
-  dfs(0);
+  dfs();
   return res;
 };
 
@@ -48,8 +49,8 @@ var permuteUnique2 = function (nums) {
   const res = [];
   const arr = [];
   const vis = new Array(nums.length).fill(false);
-  function dfs(idx) {
-    if (idx === nums.length) {
+  function dfs() {
+    if (arr.length === nums.length) {
       res.push(arr.slice());
       return;
     }
@@ -58,13 +59,13 @@ var permuteUnique2 = function (nums) {
       if (vis[i] || (i > 0 && arr.slice().includes(nums[i]))) continue;
       arr.push(nums[i]);
       vis[i] = true;
-      dfs(idx + 1);
+      dfs();
       vis[i] = false;
       // 回溯
       arr.pop();
     }
   }
-  dfs(0);
+  dfs();
   return res;
 };
 

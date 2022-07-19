@@ -22,5 +22,34 @@ var addStrings = function (num1, num2) {
   return res.reverse().join("");
 };
 
-const x = addStrings("11", "123");
+var addStrings2 = function (num1, num2) {
+  let add = 0;
+
+  let list = [];
+
+  let i = num1.length - 1;
+
+  let j = num2.length - 1;
+
+  while (i >= 0 || j >= 0) {
+    let n1 = i >= 0 ? num1[i] : 0;
+    let n2 = j >= 0 ? num2[j] : 0;
+
+    let result = +n1 + +n2 + add;
+
+    add = Math.floor(result / 10);
+
+    list.unshift(result % 10);
+
+    i--;
+
+    j--;
+  }
+
+  if (add) list.unshift(1);
+
+  return list.join("");
+};
+
+const x = addStrings2("111", "23");
 console.log("x", x);

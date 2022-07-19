@@ -27,6 +27,34 @@ var compareVersion = function (version1, version2) {
   return 0;
 };
 
+var compareVersion3 = function (version1, version2) {
+  let p1 = 0,
+    p2 = 0;
+  function getChunkIndex(str, index) {
+    while (str[index] !== "." && index < str.length) {
+      index++;
+    }
+    return index;
+  }
+  // 注意循环次数为长的数组
+  const n = Math.max(version1.length, version2.length);
+  for (let i = 0; i < n; i++) {
+    const end1 = getChunkIndex(version1, p1);
+    const end2 = getChunkIndex(version2, p2);
+    const x = +version1.slice(p1, end1);
+    const y = +version2.slice(p2, end2);
+
+    if (x > y) {
+      return 1;
+    } else if (x < y) {
+      return -1;
+    }
+    p1 = end1 + 1;
+    p2 = end2 + 1;
+  }
+  return 0;
+};
+
 // 双指针降低时间，空间复杂度
 var compareVersion2 = function (version1, version2) {
   let p1 = 0,
@@ -74,10 +102,10 @@ var compareVersion2 = function (version1, version2) {
   return 0;
 };
 
-const version1 = "1.0.1",
-  version2 = "1";
+const version1 = "1.01",
+  version2 = "1.001";
 
-console.log(compareVersion2(version1, version2));
+console.log(compareVersion3(version1, version2));
 
 // 输入：version1 = "1.01", version2 = "1.001"
 // 输出：0

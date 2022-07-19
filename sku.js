@@ -39,5 +39,28 @@ let storages = ["64g", "256g"];
 //         ["iPhone XS", "白色", "64g"],
 //         ["iPhone XS", "白色", "256g"]
 //   ]
-const x = combine(names, colors, storages);
+const x = combine1(names, colors, storages);
 console.log(x);
+
+function combine1(...args) {
+  const res = [];
+
+  const set = new Set();
+
+  function dfs(idx) {
+    const list = args[idx];
+    if (args.length === set.size) {
+      res.push([...set]);
+      return;
+    }
+    for (let i = 0; i < list.length; i++) {
+      // 剪枝
+      if (set.has(list[i])) continue;
+      set.add(list[i]);
+      dfs(idx + 1);
+      set.delete(list[i]);
+    }
+  }
+  dfs(0);
+  return res;
+}

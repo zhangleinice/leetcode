@@ -131,10 +131,6 @@ var search = function (nums, target) {
   return -1;
 };
 
-const arr = [4, 5, 6, 7, 0, 1, 2];
-
-console.log(search(arr, 0));
-
 /**
  * 求一个数的平方根
  * 1. 二分法

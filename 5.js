@@ -72,7 +72,7 @@ var longestPalindrome2 = function (s) {
       //   if (j - i + 1 > 2) {
       //     dp[i][j] = dp[i + 1][j - 1] && s[i] === s[j];
       //   }
-      //   if (j - i + 1 > max_len) {
+      //   if ( dp[i][j] && j - i + 1 > max_len) {
       //     max_len = j - i + 1;
       //     max_left = i;
       //     max_right = j;
